@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Django CRM - Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .form-login {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    .form-login h1 {
+      color: #333;
+      font-size: 28px;
+      margin-bottom: 30px;
+    }
+    .form-login .form-control {
+      border-radius: 5px;
+    }
+    .form-login .btn {
+      border-radius: 5px;
+    }
+    .form-login .form-text {
+      font-size: 14px;
+    }
+    .form-login a {
+      color: #007bff;
+      text-decoration: none;
+    }
+    .form-login a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body class="d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+
+<div class="col-md-6">
+  <div class="form-login p-4">
+    <h1 class="text-center mb-4">Login</h1>
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert" id="messageAlert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    <form method="POST" action="{% url 'login' %}">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input type="text" class="form-control" name="username" placeholder="Username" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-control" name="password" placeholder="Password" required>
+      </div>
+      <div class="mb-3">
+        <small class="form-text">Don't have an account? <a href="{% url 'register' %}">Register</a></small>
+      </div>
+      <button type="submit" class="btn btn-secondary btn-block">Login</button>
+    </form>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script>
+  setTimeout(function() {
+    document.getElementById('messageAlert').style.display = 'none';
+  }, 5000);
+</script>
+</body>
+</html>
